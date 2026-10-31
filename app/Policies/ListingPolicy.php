@@ -1,0 +1,33 @@
+<?php
+
+namespace App\Policies;
+
+use App\Models\Listing;
+use App\Models\User;
+
+class ListingPolicy
+{
+    /**
+     * Determine whether the user can create models.
+     */
+    public function create(User $user): bool
+    {
+        return true;
+    }
+
+    /**
+     * Determine whether the user can update the model.
+     */
+    public function update(User $user, Listing $listing): bool
+    {
+        return $listing->isOwnedBy($user);
+    }
+
+    /**
+     * Determine whether the user can delete the model.
+     */
+    public function delete(User $user, Listing $listing): bool
+    {
+        return $listing->isOwnedBy($user);
+    }
+}
