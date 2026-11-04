@@ -20,11 +20,11 @@ COPY --chown=www-data:www-data . /var/www/html
 COPY --from=frontend-builder --chown=www-data:www-data /app/public/build /var/www/html/public/build
 
 # Install backend dependencies without running artisan scripts
-RUN composer install --no-dev --no-interaction --prefer-dist --no-scripts
-RUN composer dump-autoload --no-dev --optimize
+# RUN composer install --no-dev --no-interaction --prefer-dist --no-scripts
+# RUN composer dump-autoload --no-dev --optimize
 
 # Switch back to secure user
 USER www-data
 
-# 🚀 AUTOMATIC SEEDING ON BOOTUP
+# AUTOMATIC SEEDING ON BOOTUP
 CMD ["sh", "-c", "php artisan migrate --force && php artisan db:seed --force && exec /usr/local/bin/docker-php-entrypoint"]
