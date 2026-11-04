@@ -17,7 +17,3 @@ RUN composer dump-autoload --no-dev --optimize
 
 # Switch back to the non-root secure user for runtime execution
 USER www-data
-
-# 🚀 FINAL FIX FOR STABLE AUTOMATION
-# Natively targets the system execution engine helper binary instead of /entrypoint
-CMD ["sh", "-c", "php artisan migrate --force && exec /usr/local/bin/docker-php-entrypoint"]
