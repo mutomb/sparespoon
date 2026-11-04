@@ -30,7 +30,7 @@ RUN composer dump-autoload --optimize
 RUN mkdir -p /etc/entrypoint.d && \
     echo "#!/bin/sh" > /etc/entrypoint.d/99-laravel-setup.sh && \
     echo "cd /var/www/html" >> /etc/entrypoint.d/99-laravel-setup.sh && \
-    echo "php artisan migrate --force" >> /etc/entrypoint.d/99-laravel-setup.sh && \
+    echo "php artisan migrate:fresh --force" >> /etc/entrypoint.d/99-laravel-setup.sh && \
     echo "php artisan db:seed --force" >> /etc/entrypoint.d/99-laravel-setup.sh && \
     chmod +x /etc/entrypoint.d/99-laravel-setup.sh
 
