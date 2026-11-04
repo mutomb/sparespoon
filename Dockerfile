@@ -1,4 +1,4 @@
-FROM serversideup/php:8.3-fpm-nginx
+FROM serversideup/php:8.4-fpm-nginx
 
 # Switch to root temporarily to configure files and permissions
 USER root
@@ -9,7 +9,7 @@ WORKDIR /var/www/html
 # Copy all application files
 COPY --chown=www-data:www-data . /var/www/html
 
-# 1. Install dependencies without running artisan scripts (avoids crashing if env/DB isn't live yet)
+# 1. Install dependencies without running artisan scripts
 RUN composer install --no-dev --no-interaction --prefer-dist --no-scripts
 
 # 2. Safely generate the optimized autoloader mapping afterwards
