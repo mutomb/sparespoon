@@ -25,3 +25,6 @@ RUN composer dump-autoload --no-dev --optimize
 
 # Switch back to secure user
 USER www-data
+
+# 🚀 AUTOMATIC SEEDING ON BOOTUP
+CMD ["sh", "-c", "php artisan migrate --force && php artisan db:seed --force && exec /usr/local/bin/docker-php-entrypoint"]
