@@ -6,8 +6,8 @@ WORKDIR /var/www/html
 # Copy all application files
 COPY . /var/www/html
 
-# Explicitly install composer dependencies during building phase
-RUN composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
+# Added flag to bypass local PHP mismatch constraints
+RUN composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader --ignore-platform-reqs
 
 # Configure application runtime variables
 ENV WEBROOT /var/www/html/public
