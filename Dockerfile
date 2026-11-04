@@ -1,19 +1,27 @@
+# --- Stage 1: Compile Frontend Assets ---
+FROM node:20-alpine AS frontend-builder
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci
+COPY . .
+RUN npm run build
+
+# --- Stage 2: Production PHP Web Server ---
 FROM serversideup/php:8.4-fpm-nginx
 
-# Switch to root temporarily to configure files and permissions
+# Switch to root temporarily to configure files
 USER root
-
-# Set the working directory
 WORKDIR /var/www/html
 
-# Copy all application files
+# Copy application files
 COPY --chown=www-data:www-data . /var/www/html
 
-# 1. Install dependencies without running artisan scripts
-RUN composer install --no-dev --no-interaction --prefer-dist --no-scripts
+# Copy the compiled Vite assets from Stage 1
+COPY --from=frontend-builder --chown=www-data:www-data /app/public/build /var/www/html/public/build
 
-# 2. Safely generate the optimized autoloader mapping afterwards
+# Install backend dependencies without running artisan scripts
+RUN composer install --no-dev --no-interaction --prefer-dist --no-scripts
 RUN composer dump-autoload --no-dev --optimize
 
-# Switch back to the non-root secure user for runtime execution
+# Switch back to secure user
 USER www-data
