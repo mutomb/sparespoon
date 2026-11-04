@@ -17,3 +17,7 @@ RUN composer dump-autoload --no-dev --optimize
 
 # Switch back to the non-root secure user for runtime execution
 USER www-data
+
+# ⚠️ WORKAROUND FOR FREE TIER AUTO-MIGRATION 
+# This runs your migrations automatically every time the container boots up live
+CMD ["sh", "-c", "php artisan migrate --force && exec /entrypoint"]
