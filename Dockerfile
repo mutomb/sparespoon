@@ -1,17 +1,16 @@
-FROM richarvey/nginx-php-fpm:php8.3-latest
+FROM serversideup/php:8.3-fpm-nginx
 
-# Set working directory
+# Switch to root temporarily to configure files and permissions
+USER root
+
+# Set the working directory
 WORKDIR /var/www/html
 
 # Copy all application files
-COPY . /var/www/html
+COPY --chown=www-data:www-data . /var/www/html
 
-# Install composer dependencies securely
+# Run composer installation natively during the build stage
 RUN composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
 
-# Configure application runtime variables
-ENV WEBROOT /var/www/html/public
-ENV APP_ENV production
-
-# Fix permissions for the storage engines
-RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+# Switch back to the non-root secure user for runtime execution
+USER www-data
