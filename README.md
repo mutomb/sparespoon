@@ -6,10 +6,11 @@ SpareSpoon is a small Laravel community marketplace for passing on food you won'
 
 No fees. No complicated checkout. Just less waste and more sharing.
 
-![Laravel](https://shields.io)
-![PHP](https://shields.io)
-![Tailwind CSS](https://shields.io)
-![Pest](https://shields.io)
+![Laravel](https://img.shields.io/badge/Laravel-13-FF2D20?style=flat-square&logo=laravel&logoColor=white)
+![PHP](https://img.shields.io/badge/PHP-8.3%2B-777BB4?style=flat-square&logo=php&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)
+![Alpine.js](https://img.shields.io/badge/Alpine.js-3-8BC0D0?style=flat-square&logo=alpinedotjs&logoColor=white)
+![Pest](https://img.shields.io/badge/Pest-5-22C55E?style=flat-square)
 
 ---
 
